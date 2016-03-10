@@ -30,7 +30,7 @@ class TocFile(DataContentBase):
         ]
 
     def is_spec(self):
-        for content_item in self.content.values():
+        for content_item in list(self.content.values()):
             if content_item.source is None:
                 continue
             else:
@@ -40,7 +40,7 @@ class TocFile(DataContentBase):
 
     def spec_deps(self):
         deps = []
-        for content_item in self.content.values():
+        for content_item in list(self.content.values()):
             if content_item.source is None:
                 continue
             else:

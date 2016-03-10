@@ -35,7 +35,7 @@ def get_top_level_links(links, conf):
     ret = []
 
     def process_target_list(lst):
-        for name, target in lst.items():
+        for name, target in list(lst.items()):
             if target == '{{current_branch}}':
                 target = conf.git.branches.current
 

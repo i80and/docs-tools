@@ -20,7 +20,7 @@ from giza.inheritance import InheritableContentBase
 logger = logging.getLogger('giza.content.tocs.models')
 
 if sys.version_info >= (3, 0):
-    basestring = str
+    str = str
 
 
 class TocData(InheritableContentBase):
@@ -32,7 +32,7 @@ class TocData(InheritableContentBase):
 
     @file.setter
     def file(self, value):
-        if not isinstance(value, basestring):
+        if not isinstance(value, str):
             logger.error("filenames must be strings: " + str(value))
         elif not value.startswith("/"):
             logger.error("'{0}' is not a valid file specification".format(value))

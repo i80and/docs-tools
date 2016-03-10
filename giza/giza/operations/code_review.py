@@ -55,7 +55,7 @@ def list_reviews(args):
 
     crconf = CodeReviewConfiguration(cr_data_file)
 
-    print(json.dumps([k for k in crconf.branches.keys()], indent=3, sort_keys=True))
+    print((json.dumps([k for k in list(crconf.branches.keys())], indent=3, sort_keys=True)))
 
 
 @argh.expects_obj
@@ -69,7 +69,7 @@ def close(args):
     safe_create_code_review_data_file(cr_data_file)
 
     with CodeReviewConfiguration.persisting(cr_data_file) as data:
-        branches = data.branches.keys()
+        branches = list(data.branches.keys())
 
         for to_delete in args._branch_name:
             if to_delete in branches:
@@ -168,9 +168,9 @@ def update_code_review(cr_data, g, use_hash):
         issue_url = get_issue_url(cr_upload)
         logger.info('updated issue: ' + issue_url)
     except subprocess.CalledProcessError as e:
-        print(e.returncode)
-        print(e.output)
-        print(' '.join(cmd))
+        print((e.returncode))
+        print((e.output))
+        print((' '.join(cmd)))
         logger.error('failed to update issue')
 
 
@@ -205,7 +205,7 @@ def create_code_review(data, g, creds):
         del data.branches[g.current_branch()]
         logger.error('failed to create issue')
         logger.error(' '.join(cmd))
-        print(e.returncode, e.output)
+        print((e.returncode, e.output))
 
 # Output processing
 
@@ -234,5 +234,5 @@ def get_issue_number(output):
 
     # if we get here, we're in trouble:
     logger.error('did not create an issue')
-    print('\n'.join(output))
+    print(('\n'.join(output)))
     raise Exception

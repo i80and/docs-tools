@@ -21,7 +21,7 @@ from giza.inheritance import InheritableContentBase, InheritanceReference
 logger = logging.getLogger('giza.content.apiargs.models')
 
 if sys.version_info >= (3, 0):
-    basestring = str
+    str = str
 
 field_type = {
     'param': 'Parameter',
@@ -79,7 +79,7 @@ class ApiArgData(InheritableContentBase):
         if isinstance(value, list):
             value = '\n'.join(value)
 
-        if not isinstance(value, basestring):
+        if not isinstance(value, str):
             raise TypeError
 
         if value.startswith('Optional.'):
@@ -163,7 +163,7 @@ class ApiArgData(InheritableContentBase):
 
     @name.setter
     def name(self, value):
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             self.state['name'] = value
             self.state['ref'] = value
         else:

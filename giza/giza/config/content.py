@@ -18,6 +18,7 @@ import logging
 
 import libgiza.config
 import giza.tools.files
+import collections
 
 logger = logging.getLogger('giza.config.')
 
@@ -103,7 +104,7 @@ class ContentType(libgiza.config.ConfigurationBase):
 
     @task_generator.setter
     def task_generator(self, value):
-        if callable(value):
+        if isinstance(value, collections.Callable):
             self.state['_task_generator'] = value
         else:
             raise TypeError
@@ -126,7 +127,7 @@ class ContentRegistry(libgiza.config.ConfigurationBase):
             raise AttributeError(name)
 
     def iterator(self):
-        return self.state.values()
+        return list(self.state.values())
 
     def output_directories(self, prefix_len=0):
         for content_type in self.iterator():
@@ -134,12 +135,12 @@ class ContentRegistry(libgiza.config.ConfigurationBase):
 
     @property
     def task_generators(self):
-        for content in self.state.values():
+        for content in list(self.state.values()):
             yield content, content.task_generator
 
     @property
     def content_prefixes(self):
-        for name, content in self.state.items():
+        for name, content in list(self.state.items()):
             yield name, content.prefixes
 
 # Factories

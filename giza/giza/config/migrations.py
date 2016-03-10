@@ -22,7 +22,7 @@ import giza.content.helper
 logger = logging.getLogger('giza.config.migrations')
 
 if sys.version_info >= (3, 0):
-    basestring = str
+    str = str
 
 
 class MigrationData(list):
@@ -169,7 +169,7 @@ class MigrationSpecification(libgiza.config.RecursiveConfigurationBase):
 
     @append.setter
     def append(self, value):
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             self.state['append'] = value
         else:
             raise TypeError('{0}: {1}'.format(type(value), str(value)))
@@ -182,7 +182,7 @@ class TransformSpecification(libgiza.config.ConfigurationBase):
 
     @regex.setter
     def regex(self, value):
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             try:
                 self.state['regex'] = re.compile(value)
             except:
@@ -197,7 +197,7 @@ class TransformSpecification(libgiza.config.ConfigurationBase):
 
     @replace.setter
     def replace(self, value):
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             self.state['replace'] = value
         else:
             raise TypeError('{0}: {1}'.format(type(value), str(value)))
@@ -227,7 +227,7 @@ class TruncateSpecification(libgiza.config.ConfigurationBase):
 
     @start_after.setter
     def start_after(self, value):
-        if isinstance(value, basestring) or isinstance(value, int):
+        if isinstance(value, str) or isinstance(value, int):
             self.state['start_after'] = value
         else:
             raise TypeError('{0}: {1}'.format(type(value), str(value)))
@@ -241,7 +241,7 @@ class TruncateSpecification(libgiza.config.ConfigurationBase):
 
     @end_before.setter
     def end_before(self, value):
-        if isinstance(value, basestring) or isinstance(value, int):
+        if isinstance(value, str) or isinstance(value, int):
             self.state['end_before'] = value
         else:
             raise TypeError('{0}: {1}'.format(type(value), str(value)))

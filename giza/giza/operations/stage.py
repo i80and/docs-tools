@@ -38,7 +38,7 @@ from giza.config.helper import fetch_config
 try:
     import configparser
 except ImportError:
-    import ConfigParser as configparser
+    import configparser as configparser
 
 LOGGER = logging.getLogger('giza.operations.stage')
 REDIRECT_PAT = re.compile('^Redirect 30[1|2|3] (\S+)\s+(\S+)', re.M)
@@ -446,7 +446,7 @@ class Staging(object):
         # If a redirect is masking a file, we can run into an invalid 404
         # when the redirect is deleted but the file isn't republished.
         # If this is the case, warn and delete the redirect.
-        for src,dest in redirects.items():
+        for src,dest in list(redirects.items()):
             src_path = os.path.join(root, src)
             if os.path.isfile(src_path) and os.path.basename(src_path) in os.listdir(os.path.dirname(src_path)):
                 LOGGER.warn('Would ignore redirect that will mask file: %s', src)
@@ -686,8 +686,8 @@ class StagingPipeline(object):
             access_key = cfg.get('authentication', 'accesskey')
             secret_key = cfg.get('authentication', 'secretkey')
         except (configparser.NoSectionError, configparser.NoOptionError):
-            print('No staging authentication found. Create a file at {0} with '
-                  'contents like the following:\n'.format(self.cfg_path))
+            print(('No staging authentication found. Create a file at {0} with '
+                  'contents like the following:\n'.format(self.cfg_path)))
             print(SAMPLE_CONFIG)
             create_config_framework(self.cfg_path)
             return None
@@ -743,7 +743,7 @@ class StagingPipeline(object):
                 suffix = '/'.join((self.auth.username, self.branch))
                 if edition:
                     suffix = '{0}/{1}/{2}'.format(self.auth.username, self.branch, edition)
-                print('    {0}/{1}'.format(self.staging_config.url, suffix))
+                print(('    {0}/{1}'.format(self.staging_config.url, suffix)))
 
     def run(self):
         self.check_builder()
@@ -771,14 +771,14 @@ class DeployPipeline(StagingPipeline):
     def print_report(self):
         """Print a list of staging URLs corresponding to the given editions."""
         print('Published to:')
-        print('    ' + self.staging_config.url)
+        print(('    ' + self.staging_config.url))
 
     def run(self):
         # Check if the active branch is publishable. This is a sanity check
         # more than anything else, since the active branch doesn't directly
         # correlate to what is built.
         if self.branch not in self.conf.git.branches.published:
-            print('Current branch ({0}) is not published'.format(self.branch))
+            print(('Current branch ({0}) is not published'.format(self.branch)))
             return
 
         self.check_builder()

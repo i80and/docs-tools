@@ -59,7 +59,7 @@ def include_files(conf, files=None):
             files[i[0]] = list(files[i[0]])
             files[i[0]].sort()
 
-        for k, v in generated_includes(conf).items():
+        for k, v in list(generated_includes(conf).items()):
             if k in files:
                 files[k].extend(v)
             else:
@@ -70,7 +70,7 @@ def include_files(conf, files=None):
 
 def included_once(conf, inc_files=None):
     results = []
-    for file, includes in include_files(conf=conf, files=inc_files).items():
+    for file, includes in list(include_files(conf=conf, files=inc_files).items()):
         if len(includes) == 1:
             results.append(file)
     return results
@@ -79,10 +79,10 @@ def included_once(conf, inc_files=None):
 def included_recusively(conf, inc_files=None):
     files = include_files(conf=conf, files=inc_files)
     # included_files is a py2ism, depends on it being an actual list
-    included_files = files.keys()
+    included_files = list(files.keys())
 
     results = {}
-    for inc, srcs in files.items():
+    for inc, srcs in list(files.items()):
         for src in srcs:
             if src in included_files:
                 results[inc] = srcs
@@ -99,7 +99,7 @@ def includes_masked(mask, conf, inc_files=None):
         m = mask + '.rst'
         results[m] = files[m]
     except (ValueError, KeyError):
-        for pair in files.items():
+        for pair in list(files.items()):
             if pair[0].startswith(mask):
                 results[pair[0]] = pair[1]
 
@@ -153,7 +153,7 @@ def include_files_unused(conf, inc_files=None):
     for fn in inc_files:
         if fn.endswith('yaml') or fn.endswith('~'):
             continue
-        if fn not in mapping.keys():
+        if fn not in list(mapping.keys()):
             results.append(fn)
 
     return results
@@ -167,7 +167,7 @@ def changed_includes(conf):
     r = Repository(repo_path)
 
     changed = []
-    for path, flag in r.status().items():
+    for path, flag in list(r.status().items()):
         if flag not in [GIT_STATUS_CURRENT, GIT_STATUS_IGNORED]:
             if path.startswith('source/'):
                 if path.endswith('.txt') or path.endswith('.rst'):

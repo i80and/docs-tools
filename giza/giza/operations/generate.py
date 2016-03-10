@@ -242,7 +242,7 @@ def redirects(args):
     c = fetch_config(args)
 
     if args.dry_run is True:
-        print(''.join(make_redirect(c)))
+        print((''.join(make_redirect(c))))
     else:
         with BuildApp.new(pool_type=c.runstate.runner,
                           pool_size=c.runstate.pool_size,

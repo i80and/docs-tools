@@ -26,8 +26,8 @@ from giza.config.helper import fetch_config
 logger = logging.getLogger('giza.operations.http')
 
 if sys.version_info[0] == 2:
-    import SocketServer as socket_server
-    import SimpleHTTPServer as http_server
+    import socketserver as socket_server
+    import http.server as http_server
 else:
     import socketserver as socket_server
     import http.server as http_server

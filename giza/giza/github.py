@@ -60,7 +60,7 @@ def get_connection(conf):
 
 
 def pprint(doc):
-    print(json.dumps(doc, indent=3))
+    print((json.dumps(doc, indent=3)))
 
 # mdbpr data handling workers
 

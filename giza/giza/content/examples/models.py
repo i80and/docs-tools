@@ -29,7 +29,7 @@ from giza.content.helper import get_all_languages
 logger = logging.getLogger('giza.content.examples.models')
 
 if sys.version_info >= (3, 0):
-    basestring = str
+    str = str
 
 
 class ExampleData(InheritableContentBase):

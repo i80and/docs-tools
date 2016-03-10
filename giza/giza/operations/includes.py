@@ -38,7 +38,7 @@ logger = logging.getLogger('giza.operations.includes')
 
 
 def render_for_console(data):
-    print(json.dumps(data, indent=3))
+    print((json.dumps(data, indent=3)))
 
 # Entry Points
 
@@ -75,7 +75,7 @@ def unused(args):
 def list(args):
     c = fetch_config(args)
 
-    render_for_console(include_files(conf=c).keys())
+    render_for_console(list(include_files(conf=c).keys()))
 
 
 @argh.arg('--filter', '-f', default=None, dest="include_mask")

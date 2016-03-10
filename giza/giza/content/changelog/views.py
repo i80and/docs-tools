@@ -55,7 +55,7 @@ def get_issue_structure(version, conf):
 
     # invert the mapping of groups to components so we can filter
     groups = dict()
-    for k, v in conf.system.files.data.jira.changelog.groups.items():
+    for k, v in list(conf.system.files.data.jira.changelog.groups.items()):
         for c in v:
             groups[c] = k
 
@@ -107,7 +107,7 @@ def get_changelog_content(fn, version, conf):
 
     # invert the mapping of nested, so we can properly handle subheadings.
     nested = dict()
-    for enclosing_level, sub_headings in conf.system.files.data.jira.changelog.nesting.items():
+    for enclosing_level, sub_headings in list(conf.system.files.data.jira.changelog.nesting.items()):
         for component in sub_headings:
             nested[component] = enclosing_level
 
@@ -122,7 +122,7 @@ def get_changelog_content(fn, version, conf):
     r.newline()
 
     # process all of the issues by group.
-    for heading, issues in headings.items():
+    for heading, issues in list(headings.items()):
         if heading in nested:
             # we deal with nested headings when we do their parent. skip here.
             continue

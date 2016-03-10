@@ -71,7 +71,7 @@ def _refresh_deps(graph, dep_map, conf):
     # For each file in the source tree, bump the timestamp of all files that
     # include it, if the file changed since the last build.
 
-    for file, dependents in graph.items():
+    for file, dependents in list(graph.items()):
         if check_hashed_dependency(file, dep_map, conf) is True:
             core_file = normalize_dep_path(file, conf, False)
             norm_file = normalize_dep_path(file, conf, True)

@@ -26,7 +26,7 @@ class ApiArgFile(DataContentBase):
     def field_type(self):
         name = set()
 
-        for content in self.content.values():
+        for content in list(self.content.values()):
             name.add(content.arg_name_rendered)
 
         if len(name) > 1:
@@ -35,7 +35,7 @@ class ApiArgFile(DataContentBase):
         return name.pop()
 
     def has_type(self):
-        for content in self.content.values():
+        for content in list(self.content.values()):
             if 'type' in content:
                 return True
 

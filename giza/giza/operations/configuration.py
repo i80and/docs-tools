@@ -31,8 +31,8 @@ from giza.config.helper import fetch_config
 def report_version(args):
     "Returns current version of giza"
 
-    print("giza: " + giza.__version__)
-    print("libgiza: " + libgiza.__version__)
+    print(("giza: " + giza.__version__))
+    print(("libgiza: " + libgiza.__version__))
 
 
 @argh.arg('--conf_path', '-c')
@@ -60,6 +60,6 @@ def render_config(args):
      c.system.files, c.system.files.paths, c.system.files.data,
      c.paths.htaccess]
 
-    print('--- ' + "str of config object >>>")
-    print(json.dumps(c.dict(), indent=3))
+    print(('--- ' + "str of config object >>>"))
+    print((json.dumps(c.dict(), indent=3)))
     print('---  <<<')

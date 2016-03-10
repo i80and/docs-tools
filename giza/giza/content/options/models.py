@@ -20,7 +20,7 @@ from giza.inheritance import InheritableContentBase, InheritanceReference
 logger = logging.getLogger('giza.content.options.models')
 
 if sys.version_info >= (3, 0):
-    basestring = str
+    str = str
 
 
 class OptionData(InheritableContentBase):
@@ -50,7 +50,7 @@ class OptionData(InheritableContentBase):
 
     @program.setter
     def program(self, value):
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             self.state['program'] = value
             self.state['ref'] = value
         else:

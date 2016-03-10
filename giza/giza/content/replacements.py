@@ -31,7 +31,7 @@ def get_replacements(conf):
     except:
         pass
 
-    for k, v in mapping.items():
+    for k, v in list(mapping.items()):
         r.replacement(k, v)
 
     return r.data

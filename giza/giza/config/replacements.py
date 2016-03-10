@@ -45,7 +45,7 @@ class ReplacementData(RecursiveConfigurationBase):
             logger.error('current edition not defined for replacements, adding no replacements')
 
     def _validate_tokens(self, tokens):
-        for value in tokens.items():
+        for value in list(tokens.items()):
             if isinstance(value, dict):
                 logger.error("replacement tokens cannot specify mappings")
                 return False
@@ -59,13 +59,13 @@ class ReplacementData(RecursiveConfigurationBase):
             self.state.update(new_keys)
 
     def items(self):
-        return self.state.items()
+        return list(self.state.items())
 
     def keys(self):
-        return self.state.keys()
+        return list(self.state.keys())
 
     def values(self):
-        return self.state.values()
+        return list(self.state.values())
 
     def update(self, value):
         self._update_tokens(value)

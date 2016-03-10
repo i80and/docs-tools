@@ -24,7 +24,7 @@
     :license: BSD, see LICENSE for details.
 """
 
-from __future__ import print_function
+
 
 import time
 import zlib
@@ -117,7 +117,7 @@ def read_inventory_v2(f, uri, join, bufsize=16*1024):
                                         # for Python modules, and the first
                                         # one is correct
             continue
-        if location.endswith(u'$'):
+        if location.endswith('$'):
             location = location[:-1] + name
         location = join(uri, location)
         invdata.setdefault(type, {})[name] = (projname, version,
@@ -325,7 +325,7 @@ def missing_reference(app, env, node, contnode):
     if node['reftype'] == 'any':
         # we search anything!
         objtypes = ['%s:%s' % (domain.name, objtype)
-                    for domain in env.domains.values()
+                    for domain in list(env.domains.values())
                     for objtype in domain.object_types]
         domain = None
     elif node['reftype'] == 'doc':

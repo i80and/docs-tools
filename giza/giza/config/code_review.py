@@ -55,7 +55,7 @@ class CodeReviewConfiguration(libgiza.config.ConfigurationBase):
                     raise TypeError
             branches = value
         elif isinstance(value, dict):
-            branches = value.items()
+            branches = list(value.items())
 
         for k, v in branches:
             self.set_branch(k, v)

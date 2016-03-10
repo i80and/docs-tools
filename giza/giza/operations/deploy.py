@@ -117,4 +117,4 @@ def twofa_code(args):
 
     creds = new_credentials_config()
 
-    print(otp.get_totp(creds.corp.seed))
+    print((otp.get_totp(creds.corp.seed)))

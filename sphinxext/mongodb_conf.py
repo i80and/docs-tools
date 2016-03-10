@@ -2,7 +2,7 @@ import yaml
 
 try:
     with open('mongodb-domain.yaml', 'r') as f:
-        conf = yaml.safe_load_all(f).next()
+        conf = next(yaml.safe_load_all(f))
 except IOError:
     conf = { 'composites': [], 'suppress-prefix': [] }
 

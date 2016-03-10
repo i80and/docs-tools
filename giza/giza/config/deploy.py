@@ -71,7 +71,7 @@ class DeployConfig(libgiza.config.ConfigurationBase):
     @staging.setter
     def staging(self, value):
         self.state['staging'] = {}
-        for project, config in value.items():
+        for project, config in list(value.items()):
             self.state['staging'][project] = StagingTargetConfig(config)
 
     @property
@@ -81,7 +81,7 @@ class DeployConfig(libgiza.config.ConfigurationBase):
     @s3_deploy.setter
     def s3_deploy(self, value):
         self.state['s3_deploy'] = {}
-        for project, config in value.items():
+        for project, config in list(value.items()):
             self.state['s3_deploy'][project] = StagingTargetConfig(config)
 
 

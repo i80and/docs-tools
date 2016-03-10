@@ -100,7 +100,7 @@ class MongoDBObject(ObjectDescription):
         objectname = self.options.get(
             'object', self.env.temp_data.get('mongodb:object'))
 
-        if self.objtype != 'program' and self.objtype in conf['prepend'].keys():
+        if self.objtype != 'program' and self.objtype in list(conf['prepend'].keys()):
             fullname = '.'.join([conf['prepend'][self.objtype], name_obj[0]])
         elif name_obj[0] in self.state.document.ids:
             fullname = 'iddup.' + name_obj[0]
@@ -255,7 +255,7 @@ class MongoDBDomain(Domain):
         objects = self.data['objects']
         newname = None
 
-        if typ != 'binary' and typ in conf['prepend'].keys():
+        if typ != 'binary' and typ in list(conf['prepend'].keys()):
             name = '.'.join([conf['prepend'][typ], name])
             newname = name
 
@@ -299,12 +299,12 @@ class MongoDBDomain(Domain):
         return make_refnode(builder, fromdocname, obj[0], name, contnode, target)
 
     def get_objects(self):
-        for refname, (docname, type) in self.data['objects'].items():
+        for refname, (docname, type) in list(self.data['objects'].items()):
             yield refname, refname, type, docname, refname.replace('$', '_S_'), 1
 
     def merge_domaindata(self, docnames, otherdata):
         # XXX check duplicates?
-        for fullname, (fn, objtype) in otherdata['objects'].items():
+        for fullname, (fn, objtype) in list(otherdata['objects'].items()):
             if fn in docnames:
                 self.data['objects'][fullname] = (fn, objtype)
 

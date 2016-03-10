@@ -157,7 +157,7 @@ def main():
 
     parser = get_base_parser()
 
-    for namespace, entry_points in commands.items():
+    for namespace, entry_points in list(commands.items()):
         if namespace == 'main':
             argh.add_commands(parser, entry_points)
         else:

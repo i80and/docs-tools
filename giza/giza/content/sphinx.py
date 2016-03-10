@@ -176,9 +176,9 @@ def stable_deduplicate(lines):
         mapping[ln] = idx
 
     if sys.version_info >= (3, 0):
-        return [ln for _, ln in mapping.keys()]
+        return [ln for _, ln in list(mapping.keys())]
     else:
-        return mapping.keys()
+        return list(mapping.keys())
 
 
 def print_build_messages(messages):

@@ -20,7 +20,7 @@ from giza.inheritance import InheritableContentBase
 logger = logging.getLogger('giza.content.glossary.models')
 
 if sys.version_info >= (3, 0):
-    basestring = str
+    str = str
 
 
 class GlossaryData(InheritableContentBase):
@@ -30,7 +30,7 @@ class GlossaryData(InheritableContentBase):
 
     @term.setter
     def term(self, value):
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             self.state['term'] = value
         else:
             raise TypeError
@@ -41,7 +41,7 @@ class GlossaryData(InheritableContentBase):
 
     @definition.setter
     def definition(self, value):
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             self.state['definition'] = value
         else:
             raise TypeError

@@ -7,7 +7,7 @@ REQUIRES = [
     'docutils',
     'hieroglyph',
     'jinja2',
-    'libgiza==0.2.7',
+    'libgiza==0.2.14',
     'onetimepass',
     'polib',
     'pyyaml',

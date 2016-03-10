@@ -42,7 +42,7 @@ def get_major_version_groupings(versions):
         else:
             major_versions[mver].append(parts)
 
-    for v in major_versions.values():
+    for v in list(major_versions.values()):
         v.sort(reverse=True)
 
     return major_versions
@@ -92,7 +92,7 @@ def changelog_tasks(conf):
 
     # add tasks for generating intermediate files for each major version. we do
     # this on all branches, and publishers need to backport the config changes.
-    for version, releases in major_versions.items():
+    for version, releases in list(major_versions.items()):
         fn = os.path.join(dirname, version + ".rst")
         t = Task(job=giza.content.changelog.views.render_intermediate_files,
                  args=(fn, version, releases, conf),
